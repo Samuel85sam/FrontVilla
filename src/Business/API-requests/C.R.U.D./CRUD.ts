@@ -1,3 +1,4 @@
+/* eslint-disable padded-blocks */
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import axios, { AxiosRequestConfig } from 'axios';
@@ -60,7 +61,14 @@ const CRUD = {
     },
 
     getForm: async (route: string, params?: { populate?: PostPopulatableKeys[] | ImgPopulatableKeys[], type?: string }) => {
-        const response = await axios.get<Post | Post[] | Img | Img[] >(`${import.meta.env.VITE_API_HOST}/${route}`, { params });
+        const response = await axios.get<Post | Post[] | Img | Img[]>(`${import.meta.env.VITE_API_HOST}/${route}`, { params });
+
+        if (response.status === 200) {
+            return response.data;
+        }
+    },
+    getPost: async (route: string, params?: { populate?: PostPopulatableKeys[] | ImgPopulatableKeys[], type?: string }) => {
+        const response = await axios.get<Post | Post[]>(`${import.meta.env.VITE_API_HOST}/${route}`, { params });
 
         if (response.status === 200) {
             return response.data;

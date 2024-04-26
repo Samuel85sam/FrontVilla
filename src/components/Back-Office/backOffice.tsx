@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import classes from './backOffice.module.css';
 import Logo from '../Logo/logo';
 import PostUI from './Post/postUI';
-import PostsList from './Posts.list/posts.list';
+import PostsList from './Posts.list/posts.list.stack';
 
 const BackOffice = () => {
   const [main, setMain] = useState<any>(); // Définition de main comme de type any
@@ -22,7 +22,6 @@ const BackOffice = () => {
   const postInterface = () => setMain(<PostUI />);
 
   const postsList = () => setMain(<PostsList />);
-
 
   const logOut = () => {
     navigate('/');

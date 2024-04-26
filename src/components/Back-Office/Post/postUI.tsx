@@ -1,9 +1,13 @@
-import React from 'react'
+/* eslint-disable arrow-body-style */
+import React from 'react';
+import PostForm from './post.form';
 
 const PostUI = () => {
   return (
-    <div>PostUI</div>
-  )
-}
+    <>
+    <PostForm post={undefined} />
+    </>
+  );
+};
 
-export default PostUI
+export default PostUI;
