@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, CardSection, Stack } from '@mantine/core';
 import CRUD from '@/Business/API-requests/C.R.U.D./CRUD';
-import { Post } from '@/Types-Interfaces/CRUD-Types/CRUD.types';
+import { Post } from '@/Types-Interfaces/CRUD.types';
 
 const Postslist = () => {
   const navigate = useNavigate();

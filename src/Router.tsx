@@ -18,14 +18,10 @@ const router = createBrowserRouter([
     element: <GuestRoute><AuthPage /></GuestRoute>,
     errorElement: <ErrorPage />,
   },
-  {
-    path: 'new/edit_post:id',
-    element: <ProtectedRoute><PostPage /></ProtectedRoute>,
-    errorElement: <ErrorPage />,
-  },
+  //TODO: gérer porps types et routeur... comment faire en sorte de passer les path en props ?
   {
     path: 'back_office',
-    element: <BackOfficePage />,
+    element: <ProtectedRoute><BackOfficePage /></ProtectedRoute>,
     errorElement: <ErrorPage />,
   },
 ]);

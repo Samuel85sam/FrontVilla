@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import CRUD from "../../../business/api-requests/CRUD";
-import { useNavigate } from "react-router-dom";
-import { NewUserData, useAuthStore } from "../../../store-zustand/authStore";
+import { useNavigate } from 'react-router-dom';
 import {
   TextInput,
   PasswordInput,
@@ -13,8 +11,13 @@ import {
   Group,
   Button,
 } from '@mantine/core';
+import CRUD from '../../Business/API-requests/C.R.U.D./CRUD';
+import { useAuthStore } from '../../Zustand/authStore';
+import { NewUserData } from '@/Types-Interfaces/Zustand-Types';
 
 const SignIn = () => {
+  console.log('signin');
+  
   const setUserData = useAuthStore((state) => state.addUserData);
   const navigate = useNavigate();
 
@@ -24,40 +27,37 @@ const SignIn = () => {
       .required('Required'),
     password: Yup.string()
       .min(6, 'must be min 6 char')
-      .required('Required')
-  })
+      .required('Required'),
+  });
 
   const formik = useFormik({
 
     initialValues: {
       adressMail: 'samuel@gmail.com2',
-      password: "password"
+      password: 'password',
     },
     validationSchema: SignupSchema,
 
     onSubmit: async (values) => {
-
       const response = await CRUD.auth(values);
 
       if (response?.status === 401) {
-        console.log('adresse mail ou password incorrect')
-        alert('adresse mail ou password incorrect')
-        navigate('/auth')
+        console.log('adresse mail ou password incorrect');
+        alert('adresse mail ou password incorrect');
+        navigate('/auth');
       }
       if (response?.status === 404) {
-        navigate('/auth')
-      } else {
-        if (response !== undefined) {
-          const userData: NewUserData = {
-            currentUser: response.data.id,
-            jwt: response.data.jwt,
-            isAuthenticated: true
-          }
-          setUserData(userData)
-          navigate('/posts')
-        }
+        navigate('/auth');
+      } else if (response !== undefined) {
+        const userData: NewUserData = {
+          currentUser: response.data.id,
+          jwt: response.data.jwt,
+          isAuthenticated: true,
+        };
+        setUserData(userData);
+        navigate('/posts');
       }
-    }
+    },
   });
   console.log(formik);
 
@@ -67,19 +67,25 @@ const SignIn = () => {
         <form
           onSubmit={formik.handleSubmit}
         >
-          <Title ta="center" >
+          <Title ta="center">
             Welcome back!
           </Title>
           <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-            <TextInput label="Email" placeholder="you@mantine.dev" required
+            <TextInput
+              label="Email"
+              placeholder="you@mantine.dev"
+              required
               id="email"
               name="adressMail"
               type="email"
               error={formik.errors.adressMail}
               onChange={formik.handleChange}
-
               value={formik.values.adressMail} />
-            <PasswordInput label="Password" placeholder="Your password" required mt="md"
+            <PasswordInput
+              label="Password"
+              placeholder="Your password"
+              required
+              mt="md"
               id="password"
               name="password"
               type="password"
@@ -89,7 +95,8 @@ const SignIn = () => {
             <Group justify="space-between" mt="lg">
             </Group>
             <Button
-              fullWidth mt="xl"
+              fullWidth
+              mt="xl"
               type="submit"
             >
               Se connecter
@@ -99,10 +106,7 @@ const SignIn = () => {
       </Container>
     </>
 
-  )
-}
+  );
+};
 
-
-export default SignIn
-
-
+export default SignIn;

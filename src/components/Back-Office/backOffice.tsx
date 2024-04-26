@@ -8,8 +8,10 @@ import classes from './backOffice.module.css';
 import Logo from '../Logo/logo';
 import PostUI from './Post/postUI';
 import PostsList from './Posts.list/posts.list.stack';
+import { useAuthStore } from '@/Zustand/authStore';
 
 const BackOffice = () => {
+  const logout = useAuthStore(state => state.logout);
   const [main, setMain] = useState<any>(); // Définition de main comme de type any
   const navigate = useNavigate();
 
@@ -25,6 +27,7 @@ const BackOffice = () => {
 
   const logOut = () => {
     navigate('/');
+    logout()
   };
 
   return (

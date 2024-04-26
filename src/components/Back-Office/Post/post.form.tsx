@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import * as Yup from 'yup';
 import CRUD from '../../../Business/API-requests/C.R.U.D./CRUD';
-import { CreatePostPayload, Post, User } from '../../../Types-Interfaces/CRUD-Types/CRUD.types';
+import { CreatePostPayload, Post, User } from '../../../Types-Interfaces/CRUD.types';
 import { useAuthStore } from '../../../Zustand/authStore';
 
 interface PostFormProps {

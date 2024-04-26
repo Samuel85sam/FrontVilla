@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CRUD from '../Business/API-requests/C.R.U.D./CRUD';
 import PostForm from '../components/Back-Office/Post/post.form';
-import { Post } from '../Types-Interfaces/CRUD-Types/CRUD.types';
+import { Post } from '../Types-Interfaces/CRUD.types';
 import { useAuthStore } from '../Zustand/authStore';
 
 const PostPage = () => {

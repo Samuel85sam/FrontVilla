@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import axios, { AxiosRequestConfig } from 'axios';
-import { AuthResponse, CreatePostPayload, Img, ImgPopulatableKeys, Post, PostPopulatableKeys } from '../../../Types-Interfaces/CRUD-Types/CRUD.types';
+import { AuthResponse, CreatePostPayload, Img, ImgPopulatableKeys, Post, PostPopulatableKeys } from '../../../Types-Interfaces/CRUD.types';
 
 //axios.defaults.withCredentials = false;
 

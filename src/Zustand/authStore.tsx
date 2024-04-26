@@ -1,20 +1,6 @@
 import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
-import { User } from '../Types-Interfaces/CRUD-Types/CRUD.types';
-
-export interface NewUserData {
-    currentUser: User['_id'],
-    jwt: User['jwt'],
-    isAuthenticated: boolean
-}
-
-interface AuthStore {
-    logout: any
-    currentUser: User['_id'] | null,
-    jwt: string | null,
-    isAuthenticated: boolean
-    addUserData: (newUserData: NewUserData) => void
-};
+import { AuthStore } from '@/Types-Interfaces/Zustand-Types';
 
 const initialUserState = {
     currentUser: null,

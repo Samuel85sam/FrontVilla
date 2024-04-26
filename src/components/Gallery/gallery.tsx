@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Img } from '@/Types-Interfaces/CRUD-Types/CRUD.types';
+import { Img } from '@/Types-Interfaces/CRUD.types';
 import CRUD from '@/Business/API-requests/C.R.U.D./CRUD';
 import { Grid } from '@mantine/core';
 

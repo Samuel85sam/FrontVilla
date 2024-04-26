@@ -1,9 +1,17 @@
-import React from 'react'
+/* eslint-disable arrow-body-style */
+import React, { useEffect } from 'react';
+import SignIn from '@/components/Auth/signIn';
 
 const AuthPage = () => {
-  return (
-    <div>AuthPage</div>
-  )
-}
+  useEffect(() => {
+    console.log('AuthPage');
+  }, []);
 
-export default AuthPage
+  return (
+    <>
+      <SignIn />
+    </>
+  );
+};
+
+export default AuthPage;
