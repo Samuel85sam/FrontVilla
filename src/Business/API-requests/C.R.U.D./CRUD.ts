@@ -52,7 +52,7 @@ const CRUD = {
         }
     },
 
-    postForm: async (route: string, data: CreatePostPayload, headers: AxiosRequestConfig<CreatePostPayload> | undefined) => {
+    postForm: async (route: string, data: CreatePostPayload, headers: AxiosRequestConfig<any> | undefined) => {
         const response = await axios.postForm(`${import.meta.env.VITE_API_HOST}/${route}`, data, headers);
 
         if (response.status === 200) {

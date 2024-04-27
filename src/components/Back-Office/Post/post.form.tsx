@@ -1,4 +1,5 @@
-//TODO: spliter le fichier en 1) Zone 2) inputs 3)image 4)buttons
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +14,9 @@ import {
     Center,
     Radio,
 } from '@mantine/core';
+//TODO: doc Axios==> foutre le bearer dans le header
 import * as Yup from 'yup';
+import { AxiosRequestConfig } from 'axios';
 import CRUD from '../../../Business/API-requests/C.R.U.D./CRUD';
 import { CreatePostPayload, Post, User } from '../../../Types-Interfaces/CRUD.types';
 import { useAuthStore } from '../../../Zustand/authStore';
@@ -32,9 +35,10 @@ interface PostFormValues {
 
 const PostForm: React.FC<PostFormProps> = ({ post }) => {
     const currentUser = useAuthStore(state => state.currentUser);
+    console.log(`current user = ${currentUser}`);
     const jwt = useAuthStore(state => state.jwt);
     const navigate = useNavigate();
-    const headers = {
+    const headers: AxiosRequestConfig['headers'] = {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${jwt}`,
     };
@@ -60,11 +64,11 @@ const PostForm: React.FC<PostFormProps> = ({ post }) => {
         validationSchema: SignupSchema,
 
         onSubmit: async (values) => {
-            sendPost(values);
+            sendPost(values, headers);
         },
     });
-
-    const sendPost = async (data: CreatePostPayload) => {
+//! ??????
+    const sendPost = async (data: CreatePostPayload, headers) => {
         console.log('sendPost');
 
         if (post === undefined) {

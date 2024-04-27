@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Card, CardSection, Stack } from '@mantine/core';
 import CRUD from '@/Business/API-requests/C.R.U.D./CRUD';
 import { Post } from '@/Types-Interfaces/CRUD.types';
+import { getImageUrl } from '@/Utils/img';
 
 const Postslist = () => {
   const navigate = useNavigate();
@@ -47,6 +48,13 @@ const Postslist = () => {
               <CardSection
                 key={post._id}
               >
+                <img
+                  width="50 px"
+                  src={getImageUrl(post.img)}
+                  alt="postImg"
+                  //alt={post.img.title}
+                  loading="lazy"
+                />
                 {/* {post.type}
                 {post.author}
                 {post.title}

@@ -16,8 +16,6 @@ import { useAuthStore } from '../../Zustand/authStore';
 import { NewUserData } from '@/Types-Interfaces/Zustand-Types';
 
 const SignIn = () => {
-  console.log('signin');
-  
   const setUserData = useAuthStore((state) => state.addUserData);
   const navigate = useNavigate();
 
@@ -105,7 +103,6 @@ const SignIn = () => {
         </form>
       </Container>
     </>
-
   );
 };
 
