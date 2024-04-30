@@ -14,9 +14,7 @@ import {
     Center,
     Radio,
 } from '@mantine/core';
-//TODO: doc Axios==> foutre le bearer dans le header
 import * as Yup from 'yup';
-import { AxiosRequestConfig } from 'axios';
 import CRUD from '../../../Business/API-requests/C.R.U.D./CRUD';
 import { CreatePostPayload, Post, User } from '../../../Types-Interfaces/CRUD.types';
 import { useAuthStore } from '../../../Zustand/authStore';
@@ -24,25 +22,13 @@ import { useAuthStore } from '../../../Zustand/authStore';
 interface PostFormProps {
     post: Post | undefined
 }
-//TODO: postFormValues ???
-interface PostFormValues {
-    type: Post['type']
-    title: Post['title'],
-    body: Post['body'],
-    img?: Pick<File, 'name' | 'type' | 'size'>,
-    author: User['_id']
-}
 
 const PostForm: React.FC<PostFormProps> = ({ post }) => {
     const currentUser = useAuthStore(state => state.currentUser);
-    console.log(`current user = ${currentUser}`);
+    console.log(`current user ==> ${currentUser}`);
     const jwt = useAuthStore(state => state.jwt);
+    console.log(`jwt ${jwt}`);
     const navigate = useNavigate();
-    const headers: AxiosRequestConfig['headers'] = {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${jwt}`,
-    };
-
     const [value, setValue] = useState('autre');
     const SignupSchema = Yup.object().shape({
         type: Yup.string().required(),
@@ -64,28 +50,30 @@ const PostForm: React.FC<PostFormProps> = ({ post }) => {
         validationSchema: SignupSchema,
 
         onSubmit: async (values) => {
-            sendPost(values, headers);
+            sendPost(values);
         },
     });
-//! ??????
-    const sendPost = async (data: CreatePostPayload, headers) => {
-        console.log('sendPost');
+    const sendPost = async (data: CreatePostPayload) => {
+        const headers = {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${jwt}`,
+        };
 
         if (post === undefined) {
             const route = 'posts';
             await CRUD.postForm(route, data, headers);
 
-            navigate('/posts');
+            navigate('/back_office');
         } else {
             const route = `posts/${post._id}`;
             await CRUD.patchFormById(route, data, headers);
 
-            navigate('/posts');
+            navigate('/back_office');
         }
     };
 
     const redirect = () => {
-        navigate('/posts');
+        navigate('/back_office');
     };
 
     useEffect(() => {
@@ -173,7 +161,7 @@ const PostForm: React.FC<PostFormProps> = ({ post }) => {
                               gradient={{ from: 'blue', to: 'cyan', deg: 90 }}
                               onClick={redirect}
                               size="medium">
-                                Retour à la liste
+                                Retour
                             </Button>
                         </Group>
                     </Center>

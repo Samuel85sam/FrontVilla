@@ -12,7 +12,7 @@ import { useAuthStore } from '@/Zustand/authStore';
 
 const BackOffice = () => {
   const logout = useAuthStore(state => state.logout);
-  const [main, setMain] = useState<any>(); // Définition de main comme de type any
+  const [main, setMain] = useState<any>(); // TODO:  Définition de main comme de type any pour le moment... oui je sais ....
   const navigate = useNavigate();
 
   const [opened, { toggle }] = useDisclosure();
@@ -27,7 +27,7 @@ const BackOffice = () => {
 
   const logOut = () => {
     navigate('/');
-    logout()
+    logout();
   };
 
   return (

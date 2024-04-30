@@ -1,49 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import {
+    Card,
+    SimpleGrid,
+    GridCol,
+} from '@mantine/core';
 import { Img } from '@/Types-Interfaces/CRUD.types';
 import CRUD from '@/Business/API-requests/C.R.U.D./CRUD';
-import { Grid } from '@mantine/core';
+import { getImageUrl } from '@/Utils/img';
+import classes from './gallery.module.css';
 
 const Gallery = () => {
-
     const [imgs, setImgs] = useState<Img[]>([]);
 
-    // const galleryImgs = async () => {
-    //     const tabImgs = await CRUD.getForm('imgs/', { populate: ['img']})
-    //     if (tabImgs !== undefined && Array.isArray(tabImgs)) {
-    //         //console.log({ tabImgs });
-    //         setImgs(tabImgs)
-    //     }
-    // }
-
-    const galleryImgs = async () => {
-        const imgs = await CRUD.getImgs('imgs/')
+    const getImgTab = async () => {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
+        const imgs = await CRUD.getImgs('imgs/');
         if (imgs !== undefined && Array.isArray(imgs)) {
-            //console.log({ imgs });
-            setImgs(imgs)
+            setImgs(imgs);
         }
     };
+//TODO: upgrade templating
 
-
+    const galleryMap = imgs.map((img) => (
+        <Card
+          radius="sm"
+          key={img.fileName + img.originalname}
+          className={classes.img}
+        >
+            <img
+              src={getImageUrl(img)}
+              alt={img.originalname} />
+        </Card>
+    ));
 
     useEffect(() => {
-        galleryImgs()
+        getImgTab();
     }, []);
-
-    //TODO: reprendre la méthode de storage des images dans un fichier "upload" et recupérer ces images via img.path ==> cela comprend un post de chaque image via l'UI.
 
     return (
         <>
-            <Grid>
-                {imgs.map((img)=>(
-                    <img
-                    key={img.originalname}
-                    >
-                        {img.path}
-                    </img>
-                ))}
-            </Grid >
+            <Card withBorder radius="xs" className={classes.card}>
+                <SimpleGrid cols={3} mt="md">
+                    {galleryMap}
+                </SimpleGrid>
+            </Card>
         </>
-    )
-}
+    );
+};
 
 export default Gallery;

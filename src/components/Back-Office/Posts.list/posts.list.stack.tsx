@@ -17,6 +17,7 @@ const Postslist = () => {
       setpost(posts);
     }
   };
+  //TODO: check si il ne faut pas aussi delete les images sinon elle ne disparaissent jamais du fichier Upload dans le back!!!
   const deletePost = async (postId: Post['_id']) => {
     const route = `posts/${postId}`;
     const response = await CRUD.deleteFormById(route);

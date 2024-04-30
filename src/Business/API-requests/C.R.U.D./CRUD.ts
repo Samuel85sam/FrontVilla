@@ -4,32 +4,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { AuthResponse, CreatePostPayload, Img, ImgPopulatableKeys, Post, PostPopulatableKeys } from '../../../Types-Interfaces/CRUD.types';
 
-//axios.defaults.withCredentials = false;
-
-//  axios.interceptors.response.use(
-//     response => response,
-//     error => {
-//         const status = error.response ? error.response.status : null;
-
-//         if (status === 401) {
-//             console.log('Handle 401');
-//         } else if (status === 404) {
-//             console.log('axios intercepted → Handle 404 ==> not found errors', error);
-//         } else {
-//             console.log('axios intercepted →  Handle other error',error);
-//         }
-
-//         return Promise.reject(error);
-//     }
-//     )
-
-// axios.interceptors.request.use(function (config) {
-//     const token = useAuthStore(state=>state.jwt )
-//     config.headers.Authorization =  `Bearer ${token}`;
-
-//     return config;
-// });
-
 const CRUD = {
 
     auth: async (data: any) => {
@@ -51,8 +25,8 @@ const CRUD = {
             return response;
         }
     },
-
-    postForm: async (route: string, data: CreatePostPayload, headers: AxiosRequestConfig<any> | undefined) => {
+//TODO: error-type ==> headers???
+    postForm: async (route: string, data: CreatePostPayload, headers: AxiosRequestConfig['headers']) => {
         const response = await axios.postForm(`${import.meta.env.VITE_API_HOST}/${route}`, data, headers);
 
         if (response.status === 200) {
@@ -95,7 +69,7 @@ const CRUD = {
         }
     },
 
-    patchFormById: async (route: string, data: any, headers: AxiosRequestConfig<any> | undefined) => {
+    patchFormById: async (route: string, data: any, headers: AxiosRequestConfig['headers']) => {
         try {
             const response = await axios.patchForm(`${import.meta.env.VITE_API_HOST}/${route}`, data, headers);
             if (response.status === 200) {
